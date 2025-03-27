@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import {
     Box,
     AppBar,
@@ -22,11 +22,13 @@ import StoreIcon from '@mui/icons-material/Store';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import { Link } from 'react-router-dom';
-import Labels from '../utils/label/en-us';
+import { US, BR } from 'country-flag-icons/react/3x2'
+import { useLanguage } from "../context/LanguageContext";
 
 const Navbar = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
-
+    const { Labels, toggleLanguage } = useLanguage();
+    
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -40,32 +42,32 @@ const Navbar = () => {
         <List>
             <ListItemButton button="true" component={Link} to="/" onClick={toggleDrawer(false)}>
                 <ListItemIcon><HomeIcon /></ListItemIcon>
-                {drawerOpen && <ListItemText primary="Home" />}
+                {drawerOpen && <ListItemText primary={Labels.button.home} />}
             </ListItemButton>
             <Divider />
             <ListItemButton button="true" component={Link} to="/exchangeRates" onClick={toggleDrawer(false)}>
                 <ListItemIcon><MonetizationOnRoundedIcon /></ListItemIcon>
-                {drawerOpen && <ListItemText primary="Exchange Rates" />}
+                {drawerOpen && <ListItemText primary={Labels.exchangeRates} />}
             </ListItemButton>
             <ListItemButton button="true" component={Link} to="/weather" onClick={toggleDrawer(false)}>
                 <ListItemIcon><WbSunnyRoundedIcon /></ListItemIcon>
-                {drawerOpen && <ListItemText primary="Weather" />}
+                {drawerOpen && <ListItemText primary={Labels.weather} />}
             </ListItemButton>
             <ListItemButton button="true" component={Link} to="/shoppingList" onClick={toggleDrawer(false)}>
                 <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
-                {drawerOpen && <ListItemText primary="Shopping List" />}
+                {drawerOpen && <ListItemText primary={Labels.shoppingList} />}
             </ListItemButton>
             <ListItemButton button="true" component={Link} to="/store" onClick={toggleDrawer(false)}>
                 <ListItemIcon><StoreIcon /></ListItemIcon>
-                {drawerOpen && <ListItemText primary="Store" />}
+                {drawerOpen && <ListItemText primary={Labels.store} />}
             </ListItemButton>
             <ListItemButton button="true" component={Link} to="/productPrice" onClick={toggleDrawer(false)}>
                 <ListItemIcon><LocalOfferIcon /></ListItemIcon>
-                {drawerOpen && <ListItemText primary="Product Price" />}
+                {drawerOpen && <ListItemText primary={Labels.productPrice} />}
             </ListItemButton>
             <ListItemButton button="true" component={Link} to="/product" onClick={toggleDrawer(false)}>
                 <ListItemIcon><QrCodeIcon /></ListItemIcon>
-                {drawerOpen && <ListItemText primary="Product" />}
+                {drawerOpen && <ListItemText primary={Labels.product} />}
             </ListItemButton>
         </List>
     );
@@ -82,6 +84,13 @@ const Navbar = () => {
                     <Typography variant="h6" sx={{ flexGrow: 1 }}>
                         {Labels.button.myApp}
                     </Typography>
+                    {Labels.language}
+                    
+                    <Button onClick={toggleLanguage}>
+                        <US title="United States" className="flag"/>
+                        <BR title="Brazil" className="flag"/>
+                    </Button>
+                    
                     <Button button="true" color="inherit" component={Link} to="/">
                         {Labels.button.home}
                     </Button>

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Checkbox, IconButton, } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
-import { useTheme } from '@mui/material/styles';
 import BasePage from '../components/BasePage';
-import Labels from '../utils/label/en-us';
+import { useLanguage } from "../context/LanguageContext";
 import { getProducts } from '../utils/api/productService';
 import {getShoppingList, deleteShoppingList, updateShoppingList, addShoppingList} from '../utils/api/shoppingListService';
 import SellIcon from '@mui/icons-material/Sell';
@@ -16,9 +15,6 @@ import BaseTopPage from '../components/BaseTopPage';
 
 const ShoppingList = () => {
 
-    const paginationModel = { page: 0, pageSize: 5 };
-    const theme = useTheme();
-
     const [quantity, setQuantity] = useState(1);
     const [items, setItems] = useState([]);
     const [editingItem, setEditingItem] = useState(null);
@@ -29,6 +25,7 @@ const ShoppingList = () => {
     const [error, setError] = useState(null);
     const [successMessage, setSucessMessage] = useState(null);
     const [itemInformation, setItemInformation] = useState([]);
+    const { Labels } = useLanguage();
 
     useEffect(() => {
         fetchProducts();

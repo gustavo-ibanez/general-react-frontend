@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Typography, Alert } from '@mui/material';
-import Labels from '../utils/label/en-us';
+import { useLanguage } from "../context/LanguageContext";
 
 
 export default function BaseTopPage({ label, error, successMessage}) {
+  const { Labels } = useLanguage();
 
   return (
       <div>

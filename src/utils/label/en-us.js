@@ -26,7 +26,7 @@ const Labels = {
     to: "To",
     value: "Value",
     weather: "Weather",
-
+    language: "EN-US",
 
     message: {
         success: {

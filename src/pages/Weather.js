@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Paper, Typography, Box} from '@mui/material';
 import { formatDate } from '../components/utils';
 import BasePage from '../components/BasePage';
-import Labels from '../utils/label/en-us';
+import { useLanguage } from "../context/LanguageContext";
 import BaseButton from '../components/BaseButton';
 import BaseSelect from '../components/BaseSelect';
 import BaseInput from '../components/BaseInput';
@@ -16,6 +16,7 @@ const Weather = () => {
     const [selectedCountry, setSelectedCountry] = useState('');
     const [selectedState, setSelectedState] = useState('');
     const [inputCity, setInputCity] = useState('');
+    const { Labels } = useLanguage();
 
     const handleCountryChange = (event) => {
         setSelectedCountry(event.target.value);

@@ -3,7 +3,7 @@ import {  IconButton} from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import BaseDataGrid from '../components/BaseDataGrid';
 import BasePage from '../components/BasePage';
-import Labels from '../utils/label/en-us';
+import { useLanguage } from "../context/LanguageContext";
 import { getStores, deleteStore, updateStore, addStore } from '../utils/api/storeService';
 import BaseButton from '../components/BaseButton';
 import BaseInput from '../components/BaseInput';
@@ -17,6 +17,7 @@ const Store = () => {
     const [isEditing, setIsEditinhg] = useState('');
     const [error, setError] = useState(null);
     const [successMessage, setSucessMessage] = useState(null);
+    const { Labels } = useLanguage();
 
     useEffect(() => {
         fetchItems();

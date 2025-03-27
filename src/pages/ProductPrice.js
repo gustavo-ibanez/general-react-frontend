@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { IconButton} from '@mui/material';
 import { Delete, Edit, Label } from '@mui/icons-material';
 import BasePage from '../components/BasePage'; 
-import Labels from '../utils/label/en-us';
+import { useLanguage } from "../context/LanguageContext";
 import { getProducts } from '../utils/api/productService';
 import { getStores } from '../utils/api/storeService';
 import { deleteProductPrice, updateProductPrice, addProductPrice, getProductPriceByFilter } from '../utils/api/priceProductService';
@@ -12,7 +12,6 @@ import BaseSelect from '../components/BaseSelect';
 import BaseInput from '../components/BaseInput';
 import BaseTopPage from '../components/BaseTopPage';
 
-// initialProduct= '672a527d266e56617cffc062'
 const ProductPrice = ({ initialProduct = ''}  ) => {
     
     const [items, setItems] = useState([]);
@@ -30,6 +29,7 @@ const ProductPrice = ({ initialProduct = ''}  ) => {
     const [stores, setStores] = useState([]);
     const [selectedStore, setSelectedStore] = useState('');
     const [listStore, setListStore] = useState('');
+    const { Labels } = useLanguage();
     
     useEffect(() => {
         fetchProducts();

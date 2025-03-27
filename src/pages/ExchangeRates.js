@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Typography, Box, Paper} from '@mui/material';
+import { Typography, Box, Paper, IconButton} from '@mui/material';
 import BasePage from '../components/BasePage'; 
-import Labels from '../utils/label/en-us';
 import BaseButton from '../components/BaseButton';
 import BaseSelect from '../components/BaseSelect';
 import BaseTopPage from '../components/BaseTopPage';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightLeft } from '@fortawesome/free-solid-svg-icons';
+import { useLanguage } from "../context/LanguageContext";
 
 const ExchangeRates = () => {
     const [data, setData] = useState(null);
@@ -12,6 +14,7 @@ const ExchangeRates = () => {
     const [currencies, setCurrencies] = useState([]);  
     const [fromCurrency, setFromCurrency] = useState('');
     const [toCurrency, setToCurrency] = useState('');
+    const { Labels } = useLanguage();
     
     useEffect(() => {
         fetch('http://localhost:5000/api/exchangeRates/currencies', {
@@ -31,6 +34,12 @@ const ExchangeRates = () => {
             .catch((error) => setError(error.message));
     }, []);
     
+    const changeCurrencies = () => {
+        const chanItem = fromCurrency
+        setFromCurrency(toCurrency)
+        setToCurrency(chanItem)
+    }
+
     const handleFetchExchangeRates = () => {
         setError(null);
         setData(null);
@@ -72,6 +81,11 @@ const ExchangeRates = () => {
                         onChange={(e) => setFromCurrency(e.target.value)}
                         array = {currencies}
                         />
+
+                <IconButton button="true" variant="contained"
+                    onClick={changeCurrencies}>
+                    <FontAwesomeIcon icon={faRightLeft} />
+                </IconButton>
 
                 <BaseSelect 
                         label = {Labels.to}
